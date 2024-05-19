@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoviesFeedApplication</string>
+    <string name="users_score">User\nScore</string>
 </resources>

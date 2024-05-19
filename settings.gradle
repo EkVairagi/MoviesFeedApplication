@@ -8,6 +8,10 @@ pluginManagement {
             }
         }
         mavenCentral()
+
+
+
+
         gradlePluginPortal()
     }
 }
@@ -16,6 +20,19 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        maven {
+            url = uri("https://maven.pkg.github.com/EkVairagi/MoviesFeedApplication")
+            credentials {
+
+
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+
+            }
+        }
+
+
     }
 }
 

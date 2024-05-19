@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bg_colour">#ffffff</color>
+    <color name="red">#B81509</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="icon_color">#032541</color>
 </resources>

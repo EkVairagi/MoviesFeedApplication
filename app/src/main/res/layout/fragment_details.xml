@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg_colour"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"/>
+
+    <ImageView
+        android:id="@+id/ivBackGround"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha=".2"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lineDivider"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMoviePoster"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/tvMovieName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivMoviePoster"
+        app:layout_constraintTop_toTopOf="@id/ivMoviePoster"
+        tools:text="The Godfather"/>
+
+    <TextView
+        android:id="@+id/tvMovieReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textSize="12sp"
+        android:textColor="#555555"
+        app:layout_constraintStart_toStartOf="@id/tvMovieName"
+        app:layout_constraintTop_toBottomOf="@id/tvMovieName"
+        tools:text="22/10/2024"/>
+
+    <FrameLayout
+        android:id="@+id/flUsersScore"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tvMovieReleaseDate"
+        app:layout_constraintStart_toStartOf="@id/guideline">
+
+        <ImageView
+            android:id="@+id/imageViewCircle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/circle_background"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tvUsersScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/usersScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="14sp"
+        android:text="@string/users_score"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        app:layout_constraintBottom_toBottomOf="@id/flUsersScore"
+        app:layout_constraintStart_toEndOf="@id/flUsersScore"
+        app:layout_constraintTop_toTopOf="@id/flUsersScore"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clIcons"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/flUsersScore"
+        app:layout_constraintStart_toStartOf="@id/guideline">
+
+        <FrameLayout
+            android:id="@+id/flAddToList"
+            android:layout_width="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="40dp"
+
+            android:background="@drawable/circular_background_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                app:tint="@color/white"
+                android:src="@drawable/ic_add"
+                android:layout_gravity="center|center_horizontal"/>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/flAddToFav"
+            android:layout_width="40dp"
+            android:background="@drawable/circular_background_icon"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="@id/flAddToList"
+            app:layout_constraintBottom_toBottomOf="@id/flAddToList"
+            app:layout_constraintStart_toEndOf="@id/flAddToList">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                app:tint="@color/white"
+                android:src="@drawable/ic_favorite"
+                android:layout_gravity="center|center_horizontal"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flAddToWatchlist"
+            android:layout_width="40dp"
+            android:background="@drawable/circular_background_icon"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="@id/flAddToFav"
+            app:layout_constraintBottom_toBottomOf="@id/flAddToFav"
+            app:layout_constraintStart_toEndOf="@id/flAddToFav">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                app:tint="@color/white"
+                android:src="@drawable/ic_watchlist"
+                android:layout_gravity="center|center_horizontal"/>
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/genres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        tools:text="Fantasy, Science fiction"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        app:layout_constraintTop_toBottomOf="@id/clIcons"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <View
+        android:id="@+id/lineDivider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="16dp"
+        android:background="#999999"
+        app:layout_constraintTop_toBottomOf="@id/ivMoviePoster"/>
+
+    <TextView
+        android:id="@+id/tvMovieOverview"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        tools:text="Lorem ipsum lorem ipsum lorem ipsum loremLorem ipsum lorem ipsum lorem ipsum loremLorem ipsum lorem ipsum lorem ipsum lorem"
+
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="@id/ivMoviePoster"
+        app:layout_constraintTop_toBottomOf="@id/ivMoviePoster"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
