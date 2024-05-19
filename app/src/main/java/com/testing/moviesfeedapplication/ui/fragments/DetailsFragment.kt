@@ -90,9 +90,11 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             }
         }
 
-        Glide.with(requireContext())
-            .load("https://media.themoviedb.org/t/p/w220_and_h330_face/" + res.getString("poster_path"))
-            .into(binding?.ivMoviePoster)
+        binding?.ivMoviePoster?.let {
+            Glide.with(requireContext())
+                .load("https://media.themoviedb.org/t/p/w220_and_h330_face/" + res.getString("poster_path"))
+                .into(it)
+        }
         binding?.tvMovieName?.text = res.getString("original_title")
 
         val formattedDate = DateUtils.formatDate(res.getString("release_date"))
@@ -107,11 +109,13 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
         binding?.ivBackGround?.alpha = 0.2f
 
-        Glide.with(requireContext())
-            .load("https://image.tmdb.org/t/p/w500/" + res.getString("backdrop_path"))
-            .apply(RequestOptions().transform(CenterCrop()))
-            .transition(DrawableTransitionOptions.withCrossFade(1000))
-            .into(binding?.ivBackGround)
+        binding?.ivBackGround?.let {
+            Glide.with(requireContext())
+                .load("https://image.tmdb.org/t/p/w500/" + res.getString("backdrop_path"))
+                .apply(RequestOptions().transform(CenterCrop()))
+                .transition(DrawableTransitionOptions.withCrossFade(1000))
+                .into(it)
+        }
 
     }
 }
