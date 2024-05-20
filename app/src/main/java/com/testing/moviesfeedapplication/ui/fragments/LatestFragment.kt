@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.testing.moviesfeedapplication.R
-import com.testing.moviesfeedapplication.adapter.PopularAdapter
+import com.testing.moviesfeedapplication.adapter.MovieAdapter
 import com.testing.moviesfeedapplication.databinding.FragmentLatestBinding
 import com.testing.moviesfeedapplication.model.Result
 import com.testing.moviesfeedapplication.ui.base.BaseFragment
@@ -51,7 +51,7 @@ class LatestFragment : BaseFragment<FragmentLatestBinding>() {
                         results?.let {
                             data.clear()
                             data.addAll(it)
-                            val popularAdapter = PopularAdapter(data) { id ->
+                            val popularAdapter = MovieAdapter(data) { id ->
                                 onMovieClick(id)
                             }
 

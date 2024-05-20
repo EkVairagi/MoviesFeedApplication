@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.testing.moviesfeedapplication.databinding.PopularItemBinding
+import com.testing.moviesfeedapplication.databinding.MovieItemBinding
 import com.testing.moviesfeedapplication.model.Result
 
-class PopularAdapter(private val dataItem: List<Result>, private val click: (String) -> Unit) :
-    RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class MovieAdapter(private val dataItem: List<Result>, private val click: (String) -> Unit) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = PopularItemBinding.inflate(
+        val binding = MovieItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
@@ -20,7 +20,7 @@ class PopularAdapter(private val dataItem: List<Result>, private val click: (Str
     }
     override fun getItemCount() = dataItem.size
 
-    inner class ViewHolder(private val itemBinding: PopularItemBinding) :
+    inner class ViewHolder(private val itemBinding: MovieItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(result: Result) {
             itemBinding.apply {

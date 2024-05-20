@@ -8,13 +8,12 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.testing.moviesfeedapplication.R
-import com.testing.moviesfeedapplication.adapter.PopularAdapter
+import com.testing.moviesfeedapplication.adapter.MovieAdapter
 import com.testing.moviesfeedapplication.databinding.FragmentPopularBinding
 import com.testing.moviesfeedapplication.model.Result
 import com.testing.moviesfeedapplication.ui.base.BaseFragment
@@ -56,7 +55,7 @@ class PopularFragment :  BaseFragment<FragmentPopularBinding>() {
                             data.addAll(it)
                             //val popularAdapter = PopularAdapter(data, this@PopularFragment)
 
-                            val popularAdapter = PopularAdapter(data) { id ->
+                            val popularAdapter = MovieAdapter(data) { id ->
                                 onMovieClick(id)
                             }
 
