@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -16,14 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.testing.moviesfeedapplication.R
 import com.testing.moviesfeedapplication.adapter.PopularAdapter
 import com.testing.moviesfeedapplication.databinding.FragmentLatestBinding
-import com.testing.moviesfeedapplication.interfaces.OnClickEvent
 import com.testing.moviesfeedapplication.model.Result
 import com.testing.moviesfeedapplication.ui.base.BaseFragment
 import com.testing.moviesfeedapplication.viewmodel.LatestViewModel
 import kotlinx.coroutines.launch
 
 
-class LatestFragment : BaseFragment<FragmentLatestBinding>(), OnClickEvent {
+class LatestFragment : BaseFragment<FragmentLatestBinding>() {
     private val data = ArrayList<Result>()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLatestBinding
@@ -53,7 +51,10 @@ class LatestFragment : BaseFragment<FragmentLatestBinding>(), OnClickEvent {
                         results?.let {
                             data.clear()
                             data.addAll(it)
-                            val popularAdapter = PopularAdapter(data, this@LatestFragment)
+                            val popularAdapter = PopularAdapter(data) { id ->
+                                onMovieClick(id)
+                            }
+
                             binding?.latest?.adapter = popularAdapter
                         }
                     }
@@ -70,13 +71,13 @@ class LatestFragment : BaseFragment<FragmentLatestBinding>(), OnClickEvent {
         }
     }
 
-
-    override fun click(id: String) {
+    private fun onMovieClick(id: String) {
         val bundle = bundleOf("id" to id)
         findNavController().navigate(
             R.id.action_viewPagerFragment_to_detailsFragment,
             bundle
         )
-
     }
+
 }
+

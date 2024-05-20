@@ -16,14 +16,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.testing.moviesfeedapplication.R
 import com.testing.moviesfeedapplication.adapter.PopularAdapter
 import com.testing.moviesfeedapplication.databinding.FragmentPopularBinding
-import com.testing.moviesfeedapplication.interfaces.OnClickEvent
 import com.testing.moviesfeedapplication.model.Result
 import com.testing.moviesfeedapplication.ui.base.BaseFragment
 import com.testing.moviesfeedapplication.viewmodel.PopularViewModel
 import kotlinx.coroutines.launch
 
 
-class PopularFragment :  BaseFragment<FragmentPopularBinding>(), OnClickEvent {
+class PopularFragment :  BaseFragment<FragmentPopularBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPopularBinding
         get() = FragmentPopularBinding::inflate
 
@@ -55,7 +54,12 @@ class PopularFragment :  BaseFragment<FragmentPopularBinding>(), OnClickEvent {
                         results?.let {
                             data.clear()
                             data.addAll(it)
-                            val popularAdapter = PopularAdapter(data, this@PopularFragment)
+                            //val popularAdapter = PopularAdapter(data, this@PopularFragment)
+
+                            val popularAdapter = PopularAdapter(data) { id ->
+                                onMovieClick(id)
+                            }
+
                             binding?.popular?.adapter = popularAdapter
                         }
                     }
@@ -71,7 +75,7 @@ class PopularFragment :  BaseFragment<FragmentPopularBinding>(), OnClickEvent {
         }
     }
 
-    override fun click(id: String) {
+    private fun onMovieClick(id: String) {
         val bundle = bundleOf("id" to id)
         findNavController().navigate(
             R.id.action_viewPagerFragment_to_detailsFragment,
