@@ -53,12 +53,9 @@ class PopularFragment :  BaseFragment<FragmentPopularBinding>() {
                         results?.let {
                             data.clear()
                             data.addAll(it)
-                            //val popularAdapter = PopularAdapter(data, this@PopularFragment)
-
                             val popularAdapter = MovieAdapter(data) { id ->
                                 onMovieClick(id)
                             }
-
                             binding?.popular?.adapter = popularAdapter
                         }
                     }
