@@ -34,7 +34,6 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
     private val viewModel: DetailsViewModel by viewModels()
 
-    private lateinit var progressDialog: ProgressDialog
     var id: String = ""
     private var genre: String? = ""
 
@@ -56,13 +55,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movieDetails.collect { result ->
-                    progressDialog.dismiss()
                     result?.fold(
                         onSuccess = { res ->
-                            updateUI(res)
+                            updateData(res)
                         },
                         onFailure = { e ->
-                            Toast.makeText(requireContext(), "Failed to load details", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
                         }
                     )
                 }
@@ -71,11 +69,10 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
     }
 
     private fun detailsApi() {
-        progressDialog = ProgressDialog.show(requireContext(), "", "Loading")
         viewModel.fetchMovieDetails(id)
     }
 
-    private fun updateUI(res: JSONObject) {
+    private fun updateData(res: JSONObject) {
         Log.d(ContentValues.TAG, res.toString())
         val arr = res.optJSONArray("genres")
         var i = 0
@@ -90,32 +87,33 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             }
         }
 
-        binding?.ivMoviePoster?.let {
+        binding?.apply {
             Glide.with(requireContext())
-                .load("https://media.themoviedb.org/t/p/w220_and_h330_face/" + res.getString("poster_path"))
-                .into(it)
-        }
-        binding?.tvMovieName?.text = res.getString("original_title")
+                    .load("https://media.themoviedb.org/t/p/w220_and_h330_face/" + res.getString("poster_path"))
+                    .into(ivMoviePoster)
 
-        val formattedDate = DateUtils.formatDate(res.getString("release_date"))
-        binding?.tvMovieReleaseDate?.text = formattedDate
+            tvMovieName.text = res.getString("original_title")
 
-        binding?.tvMovieOverview?.text = res.getString("overview")
-        binding?.genres?.text = genre
+            val formattedDate = DateUtils.formatDate(res.getString("release_date"))
+            tvMovieReleaseDate.text = formattedDate
 
-        val voteAverage = res.getString("vote_average")?.toFloat()
-        val gettingVoteAverage = (voteAverage?.times(100))
-        binding?.tvUsersScore?.text = "${gettingVoteAverage.toString().substring(0, 2)}%"
+            tvMovieOverview.text = res.getString("overview")
+            genres.text = genre
 
-        binding?.ivBackGround?.alpha = 0.2f
+            val voteAverage = res.getString("vote_average").toFloat()
+            val gettingVoteAverage = (voteAverage.times(100))
 
-        binding?.ivBackGround?.let {
+            val parseVoteScore = "${gettingVoteAverage.toString().substring(0, 2)}"
+
+            flUsersScore.setProgress(parseVoteScore.toInt())
+
+            ivBackGround.alpha = 0.2f
+
             Glide.with(requireContext())
                 .load("https://image.tmdb.org/t/p/w500/" + res.getString("backdrop_path"))
                 .apply(RequestOptions().transform(CenterCrop()))
                 .transition(DrawableTransitionOptions.withCrossFade(1000))
-                .into(it)
+                .into(ivBackGround)
         }
-
     }
 }

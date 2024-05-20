@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvMovieName"
         tools:text="22/10/2024"/>
 
-    <FrameLayout
+   <!-- <FrameLayout
         android:id="@+id/flUsersScore"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -87,7 +87,16 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-    </FrameLayout>
+    </FrameLayout>-->
+
+
+    <com.testing.moviesfeedapplication.utils.CircularProgressBar
+        android:id="@+id/flUsersScore"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintTop_toBottomOf="@id/tvMovieReleaseDate"
+        app:layout_constraintStart_toStartOf="@id/guideline"/>
 
 
     <TextView
